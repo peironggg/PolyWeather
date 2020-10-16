@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div 
+      class="col-md-6 my-4 border text-center"
+      style="height:100px;"       
+      (click)="toggleDisplay($event)"
+      >
+      <h3 *ngIf="isShowText">{{this.textDisplay}}</h3>
+      <form                
+        [formGroup]="weatherSearchForm"
+        *ngIf="isShowForm"            
+        (keydown)="fetchWeather($event, weatherSearchForm.value)">
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            id="weatherLocation"
+            aria-describedby="weatherLocation"
+            placeholder="Please enter a city"
+            formControlName="location"
+          />
+         </div>         
+       </form> 
+       <button 
+        type="button" 
+        class="btn btn-success" 
+        disabled="isDisabled"
+        (click)="onEdit()"
+        >Edit</button>
+    </div>    
+  </div>
+</div>
