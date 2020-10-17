@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
-import { GridComponent } from "./grid/grid.component";
+import { PanelComponent } from "./panel/panel.component";
 
 export const allAppRoutes: Routes = [
-  { path: '', component: GridComponent }
+  { path: '', component: PanelComponent }
 ];

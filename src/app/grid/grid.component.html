@@ -2,10 +2,10 @@
   <div class="row">
     <div 
       class="col-md-6 my-4 border text-center"
-      style="height:100px;"       
-      (click)="toggleDisplay($event)"
+      [ngStyle]="divStyle()"                   
+      (click)="activateForm()"
       >
-      <h3 *ngIf="isShowText">{{this.textDisplay}}</h3>
+      <h4 *ngIf="isShowText" [ngStyle]="textStyle()">{{this.textDisplay}}</h4>
       <form                
         [formGroup]="weatherSearchForm"
         *ngIf="isShowForm"            
@@ -16,17 +16,21 @@
             type="text"
             id="weatherLocation"
             aria-describedby="weatherLocation"
-            placeholder="Please enter a city"
+            placeholder="Enter a city"
             formControlName="location"
+            [ngStyle]="inputStyle()"
           />
          </div>         
        </form> 
        <button 
         type="button" 
-        class="btn btn-success" 
-        disabled="isDisabled"
+        class="btn btn-success btn-sm" 
+        [disabled]="isDisabled"
+        *ngIf="isShowBtn"
+        [ngStyle]="buttonStyle()"
         (click)="onEdit()"
-        >Edit</button>
+        >Edit
+      </button>
     </div>    
   </div>
 </div>
