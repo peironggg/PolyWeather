@@ -14,6 +14,7 @@ export class GridComponent implements OnInit {
   public weatherSearchForm: FormGroup;
 
   public displayInfo = {
+    city: "",
     cityDisplay: "",
     weatherDisplay: "",
     tempDisplay: "",
@@ -44,6 +45,14 @@ export class GridComponent implements OnInit {
     if (savedData) {
       this.displayInfo = savedData['displayInfo'];
       this.booleanInfo = savedData['booleanInfo'];
+
+      this.fetchWeather(
+        {
+          keyCode: 13,
+        }, {
+          location: this.displayInfo['city'],
+        }
+      )
     }
   }
 
@@ -54,20 +63,23 @@ export class GridComponent implements OnInit {
     this.booleanInfo['pointerEvent'] = "none";
   }
 
-  toggleForm() {          
-    this.booleanInfo['isShowForm'] = !this.booleanInfo['isShowForm'];
-    this.booleanInfo['isShowText'] = !this.booleanInfo['isShowText'];
+  toggleForm() {
+    if (this.booleanInfo['isShowForm']) {
+      this.booleanInfo['isShowForm'] = !this.booleanInfo['isShowForm'];
+      this.booleanInfo['isShowText'] = !this.booleanInfo['isShowText'];
+    }              
 
     if (this.booleanInfo['isDisabled']) {
       this.booleanInfo['isDisabled'] = !this.booleanInfo['isDisabled'];
     }
   }
 
-  fetchWeather(event, formValues) {
+  fetchWeather(event, formValues) {    
     if (event.keyCode == 13) {      
       this.apiService
       .getWeather(formValues.location)      
-      .pipe(mergeMap(res => {               
+      .pipe(mergeMap(res => {             
+        this.displayInfo['city'] = formValues.location;
         this.displayInfo['cityDisplay'] = `Place: ${res['name']}`;
         this.displayInfo['weatherDisplay'] = `Weather: ${res['weather'][0]['description'].split(' ').map(this.capitalize).join(' ')}`;
         this.displayInfo['tempDisplay'] = `Temperature: ${res['main']['temp']} ${String.fromCharCode(8451)}`;
