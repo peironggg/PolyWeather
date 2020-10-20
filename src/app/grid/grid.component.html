@@ -1,14 +1,24 @@
 <div class="container">
   <div class="row">
     <div 
-      class="col-md-6 my-4 border text-center"
+      class="col my-4 border text-center"
       [ngStyle]="divStyle()"                   
       (click)="activateForm()"
-      >
-      <h4 *ngIf="isShowText" [ngStyle]="textStyle()">{{this.textDisplay}}</h4>
+    >      
+      <div [ngStyle]="imgStyle()"></div>
+      <div [ngStyle]="breakStyle()"></div>
+      <h5 *ngIf="booleanInfo['isShowText']" class="" [ngStyle]="textStyle()">{{this.displayInfo['cityDisplay']}}</h5>
+      <div [ngStyle]="breakStyle()"></div>
+      <h5 *ngIf="booleanInfo['isShowText']" class="" [ngStyle]="textStyle()">{{this.displayInfo['weatherDisplay']}}</h5>
+      <div [ngStyle]="breakStyle()"></div>
+      <h5 *ngIf="booleanInfo['isShowText']" class="" [ngStyle]="textStyle()">{{this.displayInfo['tempDisplay']}}</h5>
+      <div [ngStyle]="breakStyle()"></div>
+      <h5 *ngIf="booleanInfo['isShowText']" class="" [ngStyle]="textStyle()">{{this.displayInfo['feelsLikeDisplay']}}</h5>
+      <div [ngStyle]="breakStyle()"></div>
+      <h5 *ngIf="booleanInfo['isShowText']" class="" [ngStyle]="textStyle()">{{this.displayInfo['speedDisplay']}}</h5>
       <form                
         [formGroup]="weatherSearchForm"
-        *ngIf="isShowForm"            
+        *ngIf="booleanInfo['isShowForm']"            
         (keydown)="fetchWeather($event, weatherSearchForm.value)">
         <div class="form-group">
           <input
@@ -25,8 +35,8 @@
        <button 
         type="button" 
         class="btn btn-success btn-sm" 
-        [disabled]="isDisabled"
-        *ngIf="isShowBtn"
+        [disabled]="booleanInfo['isDisabled']"
+        *ngIf="booleanInfo['isShowBtn']"
         [ngStyle]="buttonStyle()"
         (click)="onEdit()"
         >Edit

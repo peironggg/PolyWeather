@@ -10,7 +10,7 @@ export class ApiService {
 
   getWeather(location) {
     return this.http.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=d2c91c5d9ba1fef8837fdb7d9e59c1e1`
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=d2c91c5d9ba1fef8837fdb7d9e59c1e1`
     );
   }
 
